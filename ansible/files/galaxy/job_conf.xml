@@ -7,7 +7,7 @@
     <destinations default="pulsar">
         <destination id="local" runner="local"/>
         <destination id="pulsar" runner="pulsar_runner" >
-            <param id="url">http://pulsar.uni.andreas-sk.de:8913/</param>
+            <param id="url">http://pulsar.uni.example.com:8913/</param>
             <param id="private_token">supersecrettoken123456</param>
         </destination>
     </destinations>
