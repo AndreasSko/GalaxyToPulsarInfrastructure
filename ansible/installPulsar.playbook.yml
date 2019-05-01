@@ -1,0 +1,59 @@
+- hosts: pulsar-servers
+  pre_tasks:
+    - name: Install some packages
+      yum:
+        name: "{{ item }}"
+        state: installed
+        update_cache: yes
+      become: yes
+      with_items:
+        - python-pip
+        - gcc
+        - gcc-c++
+        - make
+        - vim
+        - git
+        - python-devel
+        - libcurl
+        - openssl-devel
+    - name: Install virtualenv
+      pip:
+        name: virtualenv
+        state: present
+    - name: chown the /mnt dir to centos
+      file:
+        path: /mnt
+        owner: centos
+        group: centos
+        mode: 0777
+        recurse: yes
+      become: yes
+  roles:
+    - geerlingguy.repo-epel
+    - galaxyproject.pulsar
+  tasks:
+    - name: Overwrite dependency_resolvers.conf
+      copy:
+        src: templates/dependency_resolvers_conf.xml.j2
+        dest: /mnt/pulsar/config/dependency_resolvers_conf.xml
+    - name: Overwrite local_env.sh
+      copy:
+        src: templates/local_env.sh.j2
+        dest: /mnt/pulsar/config/local_env.sh
+    - name: chown the /mnt/pulsar/dependencies dir to centos
+      file:
+        path: /mnt/pulsar/dependencies
+        owner: centos
+        group: centos
+        mode: 0777
+        recurse: yes
+    - name: Checkout Galaxy as dependency for pulsar
+      git:
+        repo: 'https://github.com/galaxyproject/galaxy.git'
+        dest: /mnt/pulsar/dependencies/galaxy
+        force: yes
+    - name: Install all the requirements for Galaxy
+      script: files/pulsar/galaxy_dependencies.sh
+      become: yes
+    - name: Start Pulsar
+      script: files/pulsar/start_pulsar.sh

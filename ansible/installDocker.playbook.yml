@@ -1,0 +1,39 @@
+- hosts: galaxy-servers
+  become: true
+
+  vars:
+    pip_install_packages:
+      - name: docker
+
+  roles:
+    - geerlingguy.repo-epel
+    - geerlingguy.pip
+    - geerlingguy.docker
+
+  tasks:
+    - name: Create Galaxy-Storage
+      file:
+        path: /srv/galaxy-storage
+        state: directory
+    - name: Start Galaxy-Container (this might take a while..)
+      docker_container:
+        name: galaxy
+        image: bgruening/galaxy-stable
+        ports:
+          - "80:80"
+          - "8021:21"
+          - "8022:22"
+        volumes:
+          - /srv/galaxy-storage/:/export/
+        restart_policy: unless-stopped
+    - name: Wait for 30 seconds
+      pause:
+        seconds: 30
+    - name: Copy job_conf.xml
+      copy:
+        src: files/galaxy/job_conf.xml
+        dest: /srv/galaxy-storage/galaxy-central/config/job_conf.xml
+    - name: Restart Galaxy-Container
+      docker_container:
+        name: galaxy
+        restart: yes
