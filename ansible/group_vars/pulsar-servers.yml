@@ -7,7 +7,7 @@ pulsar_pip_install: true
 pulsar_host: 0.0.0.0
 pulsar_port: 8913
 
-private_token: '<supersecrettoken123456>'
+private_token: 'supersecrettoken123456'
 pulsar_optional_dependencies:
   #- pyOpenSSL
   # For remote transfers initiated on the Pulsar end rather than the Galaxy end
