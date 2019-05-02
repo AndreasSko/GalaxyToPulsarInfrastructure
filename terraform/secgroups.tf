@@ -23,6 +23,21 @@ resource "openstack_networking_secgroup_rule_v2" "ingress-internal-4" {
 #   security_group_id = "${openstack_networking_secgroup_v2.ingress-public.id}"
 # }
 
+resource "openstack_networking_secgroup_v2" "ingress-public-http" {
+  name                 = "vgcn-ingress-public-http"
+  description          = "Allow incoming http-connections from anywhere"
+  delete_default_rules = true
+}
+
+resource "openstack_networking_secgroup_rule_v2" "ingress-public-http-4" {
+  direction         = "ingress"
+  ethertype         = "IPv4"
+  protocol          = "tcp"
+  port_range_min    = 80
+  port_range_max    = 80
+  security_group_id = "${openstack_networking_secgroup_v2.ingress-public-http.id}"
+}
+
 resource "openstack_networking_secgroup_v2" "egress-public" {
   name                 = "vgcn-egress-public"
   description          = "Allow any outgoing connection"
