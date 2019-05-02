@@ -11,10 +11,6 @@
     - geerlingguy.docker
 
   tasks:
-    - name: Create Galaxy-Storage
-      file:
-        path: /srv/galaxy-storage
-        state: directory
     - name: Start Galaxy-Container (this might take a while..)
       docker_container:
         name: galaxy

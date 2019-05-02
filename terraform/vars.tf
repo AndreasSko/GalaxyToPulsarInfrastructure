@@ -1,5 +1,8 @@
 variable "nfs_disk_size" {
-  default = 3
+  default = 20
+}
+variable "galaxy_disk_size" {
+  default = 20
 }
 
 variable "flavors" {
@@ -23,6 +26,10 @@ variable "image" {
 
 variable "image_id" {
   default = "42271322-6626-49b8-8907-9cdc3288963f"
+}
+
+variable "centos_image_id" {
+  default = "51478426-3a25-4121-952d-42760be6f03f"
 }
 
 variable "public_key" {
