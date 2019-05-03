@@ -12,6 +12,7 @@ variable "flavors" {
     "exec-node" = "m1.tiny"
     "nfs-server" = "m1.tiny"
     "pulsar-server" = "m1.medium"
+    "rabbitmq-server" = "m1.medium"
     "galaxy-server" = "m1.medium"
   }
 }
@@ -33,7 +34,7 @@ variable "centos_image_id" {
 }
 
 variable "public_key" {
-  default = "ssh-rsa blablabla"
+  default = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCgxYCPARaL3HfjJkpjewh4t9NxJQ9sA05PVxS5LauXwyFD07DAA1uwJ4Mk0YJiITxgmtDHhP4OdALA1c6A87aEbi5GXAlcCzGRkabmruopdWFuGZXNF2zBdhMMJYc3rKEaoKbw50oBiNcz8+xwqSNB1NGG82JPTP0xL/hgfGuokBgKPkNqClH+H6m8ep7mbXySHY/glsdd+d4R+SgitNfYUVKEuIAVSg9VshkPtQGDbuqApfKY3YEA8G2oXJgcwH9ArYBHpTrxpWEu3RUmxxo1PcoCnRnY2j6GEFVs9qd9fJuGAfDUExmknW8kHc1qIScl+xD3vBESblZh8DISKYZR"
 }
 
 variable "cloudflare_email" {
@@ -53,7 +54,7 @@ variable "name_prefix" {
 }
 
 variable "name_suffix" {
-  default = ".uni.example.com"
+  default = ".uni.andreas-sk.de"
 }
 
 variable "secgroups" {

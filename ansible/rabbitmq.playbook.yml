@@ -1,0 +1,5 @@
+- hosts: rabbitmq-servers
+  become: yes
+  roles:
+    - geerlingguy.repo-epel
+    - geerlingguy.rabbitmq

@@ -38,6 +38,8 @@ pulsar_yaml_config:
   conda_auto_install: True
   staging_directory: "{{ pulsar_staging_dir }}"
   private_token: "{{ private_token }}"
+  min_polling_interval:  0.5
+  message_queue_url: pyamqp://guest:guest@rabbitmq.uni.andreas-sk.de:5671//
   managers:
     _default_:
       type: queued_drmaa

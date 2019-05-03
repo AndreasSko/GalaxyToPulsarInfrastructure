@@ -1,12 +1,11 @@
 resource "openstack_compute_instance_v2" "galaxy-server" {
   name            = "${var.name_prefix}galaxy${var.name_suffix}"
-  image_name      = "CentOS 7"
+  image_name      = "${var.image}"
   flavor_name     = "${var.flavors["galaxy-server"]}"
   key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
   security_groups = [
     "vgcn-ingress-public",
     "vgcn-egress-public",
-    "vgcn-ingress-public-http"
   ]
 
   block_device {
@@ -40,5 +39,22 @@ data "template_cloudinit_config" "galaxy-volume" {
   part {
     content_type = "text/x-shellscript"
     content      = "${file("${path.module}/files/create_galaxy-volume.sh")}"
+  }
+  part {
+    content_type = "text/cloud-config"
+    content      = <<-EOF
+    #cloud-config
+    write_files:
+    - content: |
+        /data           /etc/auto.data          nfsvers=3
+      owner: root:root
+      path: /etc/auto.master.d/data.autofs
+      permissions: '0644'
+    - content: |
+        share  -rw,hard,intr,nosuid,quota  ${cloudflare_record.nfs-server.hostname}:/data/share
+      owner: root:root
+      path: /etc/auto.data
+      permissions: '0644'
+   EOF
   }
 }

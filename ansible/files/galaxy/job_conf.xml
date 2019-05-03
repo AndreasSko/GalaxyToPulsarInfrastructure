@@ -2,13 +2,17 @@
 <job_conf>
     <plugins>
         <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
-        <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarRESTJobRunner" />
+        <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarMQJobRunner">
+          <param id="galaxy_url">http://galaxy.uni.andreas-sk.de</param>
+          <param id="amqp_url">pyamqp://guest:guest@rabbitmq.uni.andreas-sk.de:5671//</param>
+        </plugin>
     </plugins>
     <destinations default="pulsar">
         <destination id="local" runner="local"/>
         <destination id="pulsar" runner="pulsar_runner" >
-            <param id="url">http://pulsar.uni.example.com:8913/</param>
-            <param id="private_token">supersecrettoken123456</param>
+            <param id="jobs_directory">/data/share/pulsar/files/staging/</param>
+            <!--<param id="url">http://pulsar.uni.andreas-sk.de:8913/</param>-->
+            <!--<param id="private_token">supersecrettoken123456</param>-->
         </destination>
     </destinations>
     <tools>
