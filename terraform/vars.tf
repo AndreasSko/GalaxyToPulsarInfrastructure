@@ -12,7 +12,7 @@ variable "flavors" {
     "exec-node" = "m1.tiny"
     "nfs-server" = "m1.tiny"
     "pulsar-server" = "m1.medium"
-    "rabbitmq-server" = "m1.medium"
+    "rabbitmq-server" = "m1.tiny"
     "galaxy-server" = "m1.medium"
   }
 }

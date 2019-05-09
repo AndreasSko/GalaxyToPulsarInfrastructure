@@ -4,15 +4,22 @@
         <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
         <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarMQJobRunner">
           <param id="galaxy_url">http://galaxy.uni.andreas-sk.de</param>
-          <param id="amqp_url">pyamqp://guest:guest@rabbitmq.uni.andreas-sk.de:5671//</param>
+          <param id="amqp_url">pyamqp://galaxy:7fsad9ier90iafcaewf90o@rabbitmq.uni.andreas-sk.de:5672//</param>
+          <param id="manager">_default_</param>
+          <!-- AMQP does not guarantee that a published message is received by
+               the AMQP server, so Galaxy/Pulsar can request that the consumer
+               acknowledge messages and will resend them if acknowledgement is
+               not received after a configurable timeout.  -->
+          <param id="amqp_acknowledge">True</param>
+          <!-- Number of seconds to wait for an acknowledgement before
+               republishing a message. -->
+          <!--<param id="amqp_republish_time">30</param>-->
         </plugin>
     </plugins>
     <destinations default="pulsar">
-        <destination id="local" runner="local"/>
-        <destination id="pulsar" runner="pulsar_runner" >
-            <param id="jobs_directory">/data/share/pulsar/files/staging/</param>
-            <!--<param id="url">http://pulsar.uni.andreas-sk.de:8913/</param>-->
-            <!--<param id="private_token">supersecrettoken123456</param>-->
+        <destination id="local" runner="local" />
+        <destination id="pulsar" runner="pulsar_runner">
+          <param id="jobs_directory">__PULSAR_JOBS_DIRECTORY__</param>
         </destination>
     </destinations>
     <tools>

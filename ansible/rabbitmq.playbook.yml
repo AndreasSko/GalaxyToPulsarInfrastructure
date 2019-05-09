@@ -1,5 +1,26 @@
 - hosts: rabbitmq-servers
-  become: yes
+  become: true
+  vars:
+    pip_install_packages:
+      - name: docker
   roles:
-    - geerlingguy.repo-epel
-    - geerlingguy.rabbitmq
+    - geerlingguy.pip
+  tasks:
+    - name: Creates working directory for Dockerfile
+      file:
+        path: /home/centos/rabbitmq_docker
+        state: directory
+    - name: Copy Dockerfile to remote host
+      copy:
+        src: files/rabbitmq/Dockerfile
+        dest: /home/centos/rabbitmq_docker/Dockerfile
+    - name: Build RabbitMQ-Docker image from Dockerfile
+      command: docker build -t rabbit /home/centos/rabbitmq_docker
+    - name: Start RabbitMQ-Container
+      docker_container:
+        name: rabbitmq
+        image: rabbit:latest
+        ports:
+          - "8080:15672"
+          - "5672:5672"
+        state: started
