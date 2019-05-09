@@ -21,7 +21,6 @@
           - "8022:22"
         volumes:
           - /srv/galaxy-storage/:/export/
-          - /data/share/:/data/share/
         restart_policy: unless-stopped
     - name: Wait for 30 seconds
       pause:
