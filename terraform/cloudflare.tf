@@ -14,6 +14,14 @@ resource "cloudflare_record" "pulsar-server" {
   ttl    = 120
 }
 
+resource "cloudflare_record" "rabbitmq-server" {
+  domain = "${var.cloudflare_zone}"
+  name   = "rabbitmq.uni"
+  value  = "${openstack_compute_instance_v2.rabbitmq-server.access_ip_v4}"
+  type   = "A"
+  ttl    = 120
+}
+
 resource "cloudflare_record" "central-manager" {
   domain = "${var.cloudflare_zone}"
   name   = "condor-manager.uni"

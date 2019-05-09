@@ -4,6 +4,7 @@ resource "openstack_compute_instance_v2" "pulsar-server" {
   flavor_name     = "${var.flavors["pulsar-server"]}"
   key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
   security_groups = "${var.secgroups}"
+
   user_data = <<-EOF
     #cloud-config
     write_files:

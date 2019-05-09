@@ -1,8 +1,11 @@
 [galaxy-servers]
-galaxy.uni.example.com ansible_user=centos ansible_ssh_private_key_file=PATH-TO-PRIVATE-KEY
+galaxy.uni.andreas-sk.de ansible_user=centos ansible_ssh_private_key_file=/Users/askorczyk/Dropbox/Studium/5-WS18-19/Bachelorprojekt\ -\ Galaxy/bwcloud.cert
 
 [pulsar-servers]
-pulsar.uni.example.com ansible_user=centos ansible_ssh_private_key_file=PATH-TO-PRIVATE-KEY
+pulsar.uni.andreas-sk.de ansible_user=centos ansible_ssh_private_key_file=/Users/askorczyk/Dropbox/Studium/5-WS18-19/Bachelorprojekt\ -\ Galaxy/bwcloud.cert
+
+[rabbitmq-servers]
+rabbitmq.uni.andreas-sk.de ansible_user=centos ansible_ssh_private_key_file=/Users/askorczyk/Dropbox/Studium/5-WS18-19/Bachelorprojekt\ -\ Galaxy/bwcloud.cert
 
 [all:vars]
 ansible_ssh_pipelining=yes

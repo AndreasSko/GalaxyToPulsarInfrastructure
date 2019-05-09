@@ -7,7 +7,6 @@ pulsar_pip_install: true
 pulsar_host: 0.0.0.0
 pulsar_port: 8913
 
-private_token: 'supersecrettoken123456'
 pulsar_optional_dependencies:
   #- pyOpenSSL
   # For remote transfers initiated on the Pulsar end rather than the Galaxy end
@@ -17,7 +16,7 @@ pulsar_optional_dependencies:
   # drmaa required if connecting to an external DRM using it.
   - drmaa
   # kombu needed if using a message queue
-  #- kombu
+  - kombu
   # requests and poster using Pulsar remote staging and pycurl is unavailable
   - requests
   - poster
@@ -37,7 +36,8 @@ pulsar_yaml_config:
   conda_auto_init: True
   conda_auto_install: True
   staging_directory: "{{ pulsar_staging_dir }}"
-  private_token: "{{ private_token }}"
+  min_polling_interval:  0.5
+  message_queue_url: pyamqp://galaxy:7fsad9ier90iafcaewf90o@rabbitmq.uni.andreas-sk.de:5672//
   managers:
     _default_:
       type: queued_drmaa

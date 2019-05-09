@@ -1,6 +1,6 @@
 resource "openstack_compute_instance_v2" "nfs-server" {
   name            = "${var.name_prefix}nfs${var.name_suffix}"
-  image_name        = "${var.image}"
+  image_name      = "${var.image}"
   flavor_name     = "${var.flavors["nfs-server"]}"
   key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
   security_groups = "${var.secgroups}"
@@ -26,7 +26,6 @@ resource "openstack_compute_instance_v2" "nfs-server" {
   user_data = "${data.template_cloudinit_config.nfs-share.rendered}"
 }
 
-
 resource "openstack_blockstorage_volume_v2" "volume_nfs_data" {
   name = "${var.name_prefix}volume_nfs_data"
   size = "${var.nfs_disk_size}"
@@ -43,7 +42,8 @@ data "template_cloudinit_config" "nfs-share" {
 
   part {
     content_type = "text/cloud-config"
-    content      = <<-EOF
+
+    content = <<-EOF
     #cloud-config
     write_files:
     - content: |
@@ -59,6 +59,4 @@ data "template_cloudinit_config" "nfs-share" {
      - [ exportfs, -avr ]
    EOF
   }
-
-
 }

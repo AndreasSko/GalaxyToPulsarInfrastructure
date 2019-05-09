@@ -1,0 +1,3 @@
+FROM rabbitmq:3-management
+ENV RABBITMQ_DEFAULT_USER=galaxy
+ENV RABBITMQ_DEFAULT_PASS=7fsad9ier90iafcaewf90o
