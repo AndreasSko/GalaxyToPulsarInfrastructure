@@ -1,0 +1,13 @@
+conda_auto_init: True
+conda_auto_install: True
+dependency_resolvers_config_file: dependency_resolvers_conf.xml
+managers:
+  _default_:
+    type: queued_drmaa
+    submit_universe: vanilla
+    submit_should_transfer_files: true
+message_queue_url: pyamqp://galaxy:7fsad9ier90iafcaewf90o@rabbitmq.uni.andreas-sk.de:5672//
+min_polling_interval: 0.5
+persistence_directory: /data/share/persisted_data
+staging_directory: /data/share/staging
+tool_dependency_dir: /data/share/tools/

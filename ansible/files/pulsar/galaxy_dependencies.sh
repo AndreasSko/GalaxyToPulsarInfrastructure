@@ -1,3 +1,3 @@
-cd /mnt/pulsar
+cd /opt/pulsar
 . venv/bin/activate
-pip install -r /mnt/pulsar/dependencies/galaxy/lib/galaxy/dependencies/pinned-requirements.txt
+pip install -r /opt/pulsar/dependencies/galaxy/lib/galaxy/dependencies/pinned-requirements.txt
