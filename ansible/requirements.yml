@@ -1,6 +1,5 @@
 - geerlingguy.repo-epel
 - geerlingguy.pip
 - geerlingguy.docker
-- geerlingguy.rabbitmq
 
 - galaxyproject.pulsar
