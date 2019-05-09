@@ -4,3 +4,4 @@
 #   container_format = "${var.image["container_format"]}"
 #   disk_format = "${var.image["disk_format"]}"
 # }
+

@@ -55,7 +55,7 @@ resource "openstack_compute_instance_v2" "exec-node" {
   count           = "${var.exec_node_count}"
   name            = "${var.name_prefix}exec-node-${count.index}${var.name_suffix}"
   flavor_name     = "${var.flavors["exec-node"]}"
-  image_name        = "${var.image}"
+  image_name      = "${var.image}"
   key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
   security_groups = "${var.secgroups}"
   network         = "${var.network}"

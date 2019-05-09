@@ -1,19 +1,21 @@
 variable "nfs_disk_size" {
   default = 20
 }
+
 variable "galaxy_disk_size" {
   default = 20
 }
 
 variable "flavors" {
   type = "map"
+
   default = {
     "central-manager" = "m1.tiny"
-    "exec-node" = "m1.tiny"
-    "nfs-server" = "m1.tiny"
-    "pulsar-server" = "m1.medium"
+    "exec-node"       = "m1.tiny"
+    "nfs-server"      = "m1.tiny"
+    "pulsar-server"   = "m1.medium"
     "rabbitmq-server" = "m1.tiny"
-    "galaxy-server" = "m1.medium"
+    "galaxy-server"   = "m1.medium"
   }
 }
 

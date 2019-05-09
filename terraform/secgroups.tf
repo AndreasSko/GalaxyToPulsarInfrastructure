@@ -10,6 +10,7 @@ resource "openstack_networking_secgroup_rule_v2" "ingress-public-4" {
   remote_ip_prefix  = "${data.http.local-ip.body}/24"
   security_group_id = "${openstack_networking_secgroup_v2.ingress-public.id}"
 }
+
 resource "openstack_networking_secgroup_rule_v2" "ingress-internal-4" {
   direction         = "ingress"
   ethertype         = "IPv4"
@@ -57,5 +58,5 @@ resource "openstack_networking_secgroup_rule_v2" "egress-public-4" {
 # }
 
 data "http" "local-ip" {
-   url = "http://icanhazip.com"
+  url = "http://icanhazip.com"
 }
