@@ -20,6 +20,10 @@ Usage:
 
       ansible-playbook galaxy.playbook.yml -i hosts
 
+- Install RabbitMQ
+
+      ansible-playbook rabbitmq.playbook.yml -i hosts
+
 - Install Pulsar
 
       ansible-playbook pulsar.playbook.yml -i hosts
