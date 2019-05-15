@@ -29,16 +29,18 @@
       copy:
         src: files/pulsar/app.yml
         dest: /opt/pulsar/config/app.yml
-    - name: Checkout Galaxy as dependency for pulsar
-      git:
-        repo: 'https://github.com/galaxyproject/galaxy.git'
-        dest: /opt/pulsar/dependencies/galaxy
-        force: yes
-    - name: Install all the requirements for Galaxy
-      script: files/pulsar/galaxy_dependencies.sh
-      become: yes
-    - name: (Re)start Pulsar
-      service:
-        name: pulsar
+    # - name: Checkout Galaxy as dependency for pulsar
+    #   git:
+    #     repo: 'https://github.com/galaxyproject/galaxy.git'
+    #     dest: /opt/pulsar/dependencies/galaxy
+    #     force: yes
+    # - name: Install all the requirements for Galaxy
+    #   script: files/pulsar/galaxy_dependencies.sh
+    #   become: yes
+    - name: SystemD daemon-reload and enable/start service
+      systemd:
         state: started
+        enabled: yes
+        name: pulsar.service
+        daemon_reload: yes
       become: yes
