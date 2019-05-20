@@ -4,6 +4,10 @@ main:
 	terraform validate
 	yes yes | terraform apply
 
+rebuild:
+	yes yes | terraform destroy
+	yes yes | terraform apply
+
 fmt:
 	terraform fmt
 
