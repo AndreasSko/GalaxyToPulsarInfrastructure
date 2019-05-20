@@ -1,21 +1,4 @@
 - hosts: pulsar-servers
-  pre_tasks:
-    - name: Install some packages
-      yum:
-        name: "{{ item }}"
-        state: installed
-        update_cache: yes
-      become: yes
-      with_items:
-        - python-pip
-        - gcc
-        - gcc-c++
-        - make
-        - vim
-        - git
-        - python-devel
-        - libcurl
-        - openssl-devel
   tasks:
     - name: Overwrite dependency_resolvers.conf
       copy:
@@ -37,9 +20,11 @@
     # - name: Install all the requirements for Galaxy
     #   script: files/pulsar/galaxy_dependencies.sh
     #   become: yes
+    - name: Update pulsar to newest version
+      script: files/pulsar/update_pulsar.sh
     - name: SystemD daemon-reload and enable/start service
       systemd:
-        state: started
+        state: restarted
         enabled: yes
         name: pulsar.service
         daemon_reload: yes
