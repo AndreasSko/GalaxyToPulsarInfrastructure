@@ -11,6 +11,8 @@
                acknowledge messages and will resend them if acknowledgement is
                not received after a configurable timeout.  -->
           <param id="amqp_acknowledge">True</param>
+          <param id="amqp_ack_republish_time">30</param>
+          <param id="amqp_publish_retry">True</param>
           <!-- Number of seconds to wait for an acknowledgement before
                republishing a message. -->
           <!--<param id="amqp_republish_time">30</param>-->

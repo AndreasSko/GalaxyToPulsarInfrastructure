@@ -11,3 +11,20 @@ min_polling_interval: 0.5
 persistence_directory: /data/share/persisted_data
 staging_directory: /data/share/staging
 tool_dependency_dir: /data/share/tools/
+
+# Resend Message if galaxy doesn't seem to have received it
+amqp_acknowledge: true
+amqp_ack_republish_time: 30
+
+## AMQP Reconnection Parameters. Control if, and how often messages are re-sent
+##if they fail
+# Comments taken from http://kombu.readthedocs.org/en/latest/reference/kombu.connection.html#kombu.connection.Connection.ensure
+amqp_publish_retry: True
+## Maximum number of times to retry. If this limit is exceeded the connection error will be re-raised.
+amqp_publish_retry_max_retries: 5
+## The number of seconds we start sleeping for.
+amqp_publish_retry_interval_start: 10
+## How many seconds added to the interval for each retry.
+amqp_publish_retry_interval_step: 10
+## Maximum number of seconds to sleep between each retry.
+amqp_publish_retry_interval_max: 60
